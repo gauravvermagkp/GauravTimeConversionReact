@@ -1,0 +1,14 @@
+.mm{
+display:flex; 
+gap:14px; 
+align-items:center; 
+margin-top:8px;
+min-width:200px;
+}
+.region {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: var(--muted);
+    display: inline-block;
+    vertical-align: middle;
+}
