@@ -131,7 +131,6 @@ export function convertedTime(inputDate, preferredBase, timeZone) {
 }
 
 export const zone_name_mapping_original = {
-    // 'United States': 'America/New_York',
     India: 'Asia/Kolkata',
     Australia: 'Australia/Sydney',
     Belgium: 'Europe/Berlin',
@@ -148,6 +147,12 @@ export const zone_name_mapping_original = {
     Switzerland: 'Europe/Berlin',
     Thailand: 'Asia/Bangkok'
 };
+
+export const zone_name_mapping_extras_original = {
+    'USA': 'America/New_York'  
+};
+
+
 export let region_mapping = {
     APAC: ['Australia', 'Thailand', 'Japan'],
     CLAR: ['Brazil', 'Mexico', 'Canada'],
