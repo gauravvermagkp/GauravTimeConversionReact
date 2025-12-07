@@ -1,0 +1,85 @@
+import { convertedTime, timeDiffLabel, sorting, getRegionForCountry, zone_name_mapping_extras_original, region_mapping } from '../helper_functions.js';
+import { useState, useEffect } from 'react';
+import PrimaryEST from './PrimaryEST.jsx'
+import ConvertedChips from './ConvertedChips.jsx';
+import './UserInputSection.css'
+
+
+
+export default function UserInputSection({ props_object }) {
+
+    const zone_name_mapping = props_object.zone_name_mapping
+    const sort = props_object.sort
+    const preferredBase = props_object.preferredBase
+    const setzone_name_mapping = props_object.setzone_name_mapping
+    const setdiff_utc = props_object.setdiff_utc
+    const setdiff_local = props_object.setdiff_local
+    const showDiff = props_object.showDiff
+    const region = props_object.region
+    const diff_utc = props_object.diff_utc
+    const diff_local = props_object.diff_local
+
+    const [convertedTimes, setConvertedTimes] = useState({});
+    const [collapseConverted, setcollapseConverted] = useState(true)
+    const [inputDate, setinputDate] = useState("")
+
+    useEffect(() => {
+        if (!inputDate) return;
+        const newConvertedTimes = {};
+        let newConvertedTimes_sorted = {};
+        const utc_diffs = {};
+        const local_diffs = {};
+        Object.entries(props_object.zone_name_mapping).forEach(([country, tz_name]) => {
+            newConvertedTimes[country] = convertedTime(inputDate, props_object.preferredBase, tz_name);
+            utc_diffs[country] = timeDiffLabel(tz_name, preferredBase)[0] || "--";
+            local_diffs[country] = timeDiffLabel(tz_name, preferredBase)[1] || "--";
+        });
+        setConvertedTimes(newConvertedTimes);
+        props_object.setdiff_utc(utc_diffs);
+        props_object.setdiff_local(local_diffs);
+
+        newConvertedTimes_sorted = sorting(newConvertedTimes, sort)
+        let zone_name_mapping_sorted = Object.keys(newConvertedTimes_sorted)
+            .reduce((acc, country) => {
+                acc[country] = zone_name_mapping[country];
+                return acc;
+            }, {});
+        setzone_name_mapping(zone_name_mapping_sorted)
+
+    }, [inputDate, props_object.preferredBase, props_object.sort]);
+
+
+    return (
+        <>
+            <div className='card'>
+                <h3>User Input Converted</h3>
+                <button type="button" class="collapse-btn" onClick={() => setcollapseConverted(!collapseConverted)}>{collapseConverted ? '+' : '-'}</button>
+                {!collapseConverted ? <>
+                    <label className='cardlabel'>Choose Date & Time ({props_object.preferredBase}):</label>
+                    <input id="userInput" type="datetime-local" onChange={(e) => setinputDate(e.target.value)} />
+                    <div className="prominent">
+                        <PrimaryEST converted_time={convertedTimes['USA']} />
+                        <div className="others zone-table">
+                            {Object.entries(props_object.zone_name_mapping).map(([country, tz_name]) => {
+                                if (Object.keys(zone_name_mapping_extras_original).includes(country)) return null
+                                let country_region = getRegionForCountry(country, region_mapping)
+                                if (props_object.region === "ALL") {
+                                    return <ConvertedChips key={country} country={country} tz_name={tz_name} converted_time={convertedTimes[country]}
+                                        diff_local={props_object.diff_local[country]}
+                                        diff_utc={props_object.diff_utc[country]} showDiff={props_object.showDiff} country_region={country_region} />
+                                }
+                                else if (region_mapping[props_object.region].includes(country)) {
+                                    return <ConvertedChips key={country} country={country} tz_name={tz_name} converted_time={convertedTimes[country]}
+                                        diff_local={props_object.diff_local[country]}
+                                        diff_utc={props_object.diff_utc[country]} showDiff={props_object.showDiff} country_region={country_region} />
+                                }
+                            }
+                            )}
+                        </div>
+                    </div>
+                </> : null}
+            </div>
+        </>
+
+    )
+}

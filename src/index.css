@@ -49,6 +49,13 @@ h1 {
     color: #143370;
 }
 
+h3 {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #143370;
+}
+
 select {
     padding: 10px 12px;
     border-radius: 8px;

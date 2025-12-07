@@ -42,7 +42,7 @@ function timediffformat(diffMinutes, base) {
 
 }
 
-export function timeDiffLabel(tz, preferredBase) {    
+export function timeDiffLabel(tz, preferredBase) {
     const now = new Date();
     const offsetgmt = getOffsetMinutes(now, "UTC");
     const offsetlocal = getOffsetMinutes(now, preferredBase);
@@ -74,12 +74,12 @@ export function liveTime(zone_name_mapping) {
             minute: '2-digit',
             second: '2-digit',
             hour12: true,
-            timeZone:tz_name
+            timeZone: tz_name
         };
         newliveTimes[country] = new Date().toLocaleString('en-GB', opts);
-       
+
     })
-    
+
     return newliveTimes
 }
 
@@ -114,23 +114,14 @@ export function convertedTime(inputDate, preferredBase, timeZone) {
             utcMillis = localUtcMillis + estOffsetMs;
 
         }
-        const converted_date = new Date(utcMillis).toLocaleString('en-GB', opts)
-
-
-        const converted_userinput = converted_date
-        const converted_live = new Date(localUtcMillis).toLocaleString('en-GB', opts)
-        const output = timeDiffLabel(timeZone, preferredBase)
-        return [converted_userinput, ...output, converted_live]
+        return new Date(utcMillis).toLocaleString('en-GB', opts)
     }
     else {
-        const converted_live = new Date(localUtcMillis).toLocaleString('en-GB', opts)
-        const output = timeDiffLabel(timeZone, preferredBase)
-        return ['--', ...output, converted_live]
-
+        return '--'
     }
 }
 
-export const zone_name_mapping_original = {
+const zone_name_mapping_original = {
     India: 'Asia/Kolkata',
     Australia: 'Australia/Sydney',
     Belgium: 'Europe/Berlin',
@@ -149,8 +140,10 @@ export const zone_name_mapping_original = {
 };
 
 export const zone_name_mapping_extras_original = {
-    'USA': 'America/New_York'  
+    'USA': 'America/New_York'
 };
+
+export const zone_name_mapping_initial = { ...zone_name_mapping_original, ...zone_name_mapping_extras_original };
 
 
 export let region_mapping = {
@@ -172,4 +165,14 @@ export function getRegionForCountry(country, mapping) {
     }
     return "ALL";
 }
+
+export function sorting(timeObj, sort) {
+    return Object.entries(timeObj)  //ASC
+        .sort((a, b) => sort ? new Date(a[1]) - new Date(b[1]) : new Date(b[1]) - new Date(a[1]))
+        .reduce((acc, [country, time]) => {
+            acc[country] = time;
+            return acc;
+        }, {});
+}
+
 
