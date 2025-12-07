@@ -9,6 +9,7 @@ import SelectRegion from './components/SelectRegion'
 import {zone_name_mapping_initial} from './helper_functions.js'
 import LiveSection from './components/LiveSection.jsx'
 import UserInputSection from './components/UserInputSection.jsx'
+import BusinessHours from './components/BusinessHours.jsx'
 
 
 
@@ -32,7 +33,8 @@ function App() {
     region : region,
     diff_local : diff_local,
     diff_utc : diff_utc,
-    showDiff : showDiff
+    showDiff : showDiff,
+    setsort:setsort
   }
 
   return (
@@ -40,8 +42,8 @@ function App() {
       <Header preferredBase={preferredBase} setpreferredBase={setpreferredBase} showDiff={showDiff} setshowDiff={setshowDiff} />
 
       <div className='card'>
-        <SelectRegion region_data={[region, setRegion]} />
-        <button className="sort-btn sort-arrow" onClick={() => setsort(!sort)}>{sort ? '▲' : '▼'}</button>
+        <SelectRegion props_object={props_object} />        
+       
       </div>
       <LiveSection props_object={props_object} />
       <UserInputSection props_object={props_object}/>

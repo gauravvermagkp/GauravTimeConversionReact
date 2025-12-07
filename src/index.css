@@ -66,48 +66,6 @@ select {
 }
 
 
-/* ============================== */
-.sort-arrow {
-    font-size: 18px;
-    font-weight: bold;
-    width: 36px;
-    height: 32px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s, transform 0.15s;
-}
-
-.sort-arrow.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-    transform: scale(1.05);
-}
-
-.sort-arrow:hover {
-    background: rgba(59, 130, 246, 0.18);
-}
-
-
-.sort-btn {
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: linear-gradient(180deg, #fff, var(--accent-light));
-    cursor: pointer;
-    font-size: 14px;
-    margin : 8px 0 2px 2px;
-    float: right;
-
-
-}
-
-.sort-btn.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-}
 
 /* ===================================================== */
  
@@ -183,6 +141,7 @@ select {
 .zone-row.clar{
     border-left: 6px solid var(--est-accent);
 }
+
 
 
 

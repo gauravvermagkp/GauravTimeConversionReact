@@ -66,4 +66,47 @@
     color: #9a3412;
 }
 
+/* ======================================= */
+/* AM/PM tone styles - softer, no background, with icon via ::before */
+.time-am {
+    color: #b45309;
+}
+
+.time-pm {
+    color: #1d4ed8;
+}
+
+.zone-value.time-am::before,
+.est-box .big.time-am::before {
+    content: "☀️ ";
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.zone-value.time-pm::before,
+.est-box .big.time-pm::before {
+    content: "🌙 ";
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.zone-value.time-am {
+    background: white;
+    /* bright soft yellow */
+    color: orange;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.zone-value.time-pm {
+    background: black;
+    /* bright soft blue */
+    color: burlywood;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+
 

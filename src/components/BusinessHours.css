@@ -1,0 +1,50 @@
+
+.biz-guide {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.biz-label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.biz-legends {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.biz-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.biz-core {
+    border-color: rgba(22, 163, 74, 0.7);
+}
+
+.biz-off {
+    border-color: rgba(148, 163, 184, 0.9);
+}
+
+.biz-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.biz-dot-core {
+    background: #16a34a;
+}
+
+.biz-dot-off {
+    background: #9ca3af;
+}
