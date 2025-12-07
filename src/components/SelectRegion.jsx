@@ -20,6 +20,7 @@ export default function SelectRegion({ props_object }) {
                 <option value="EMEA">EMEA</option>
                 <option value="CLAR">CLAR</option>
             </select>
+            {console.log('Selected Region in SelectRegion.jsx:', region)}
             <label className='cardlabel'>Count: {region_mapping[region].length}</label>
             <button className={`sort-btn ${ASC_DESC_Class}`} onClick={() => setsort(!sort)}>{sort ? '▲' : '▼'}</button>
             <BusinessHours />

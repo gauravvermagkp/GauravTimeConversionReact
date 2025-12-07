@@ -109,4 +109,28 @@
 }
 
 
+/* ========================================= */
+/* Meeting planner / business hours shading – color the chips themselves */
+.business-core {
+    background: linear-gradient(180deg, #ecfdf3, #dcfce7);
+    border-color: rgba(22, 163, 74, 0.35);
+    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.12);
+}
+
+
+.business-off {
+    background: linear-gradient(180deg, #f9fafb, #e5e7eb);
+    border-color: rgba(148, 163, 184, 0.4);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+    opacity: 0.95;
+}
+
+.business-extended {
+    background: linear-gradient(180deg, #f9fafb, #e5e7eb);
+    border-color: rgba(148, 163, 184, 0.4);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+    opacity: 0.95;
+}
+
+
 

@@ -176,3 +176,21 @@ export function sorting(timeObj, sort) {
 }
 
 
+// =================================================================
+
+
+// classify business-hours bucket for a given instant and timezone
+export function classifyBusinessHours(time_str, timeZone) {
+    if (!time_str || time_str === '--') return 'business-off';
+
+    const time = time_str.split(", ")[1];
+    let [h, m, s] = time.split(" ")[0].split(":").map(Number);
+    const ampm = time.split(" ")[1].toLowerCase();
+
+    if (ampm === "pm" && h !== 12) h += 12;
+    if (ampm === "am" && h === 12) h = 0;
+    if (isNaN(h)) return 'business-off';
+    // core: 09:00–18:00, off: others (we treat everything else as extended/off)
+    if (h >= 9 && h < 18) return 'business-core';
+    return 'business-extended';
+}

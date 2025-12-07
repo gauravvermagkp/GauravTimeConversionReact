@@ -23,18 +23,19 @@ function App() {
   const [showDiff, setshowDiff] = useState(true)
   const [sort, setsort] = useState(true) 
 
-  const props_object = {    
-    setzone_name_mapping : setzone_name_mapping,
-    setdiff_utc : setdiff_utc,
-    setdiff_local : setdiff_local,
+  const props_object = {
     zone_name_mapping : zone_name_mapping,
+    setzone_name_mapping : setzone_name_mapping,
     preferredBase : preferredBase,
-    sort : sort,
-    region : region,
     diff_local : diff_local,
+    setdiff_local : setdiff_local,
     diff_utc : diff_utc,
+    setdiff_utc : setdiff_utc,
     showDiff : showDiff,
-    setsort:setsort
+    sort : sort,
+    setsort:setsort,
+    region : region,
+    setRegion : setRegion
   }
 
   return (
