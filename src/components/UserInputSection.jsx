@@ -31,9 +31,7 @@ export default function UserInputSection({ props_object }) {
         const utc_diffs = {};
         const local_diffs = {};
         if (!inputDate) {
-            setConvertedTimes(newConvertedTimes);
-            setdiff_utc(utc_diffs);
-            setdiff_local(local_diffs);
+            setConvertedTimes(newConvertedTimes);         
             return
         };
 
