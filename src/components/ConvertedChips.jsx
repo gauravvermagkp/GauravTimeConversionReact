@@ -11,7 +11,7 @@ export default function ConvertedChips({ country, tz_name, converted_time, diff_
         <>          
          <div className={`zone-row ${biz_hrs_category} ${country_region?country_region.toLowerCase():''} `}>
             <div className="zone-name">{`${country} (${tz_name})`}</div>
-            <div className={`zone-value ${AM_PM_CLASS}`}>{converted_time}</div>
+            <div className={`zone-value ${AM_PM_CLASS}`}>{converted_time?converted_time:'--'}</div>
             {showDiff ?  <div className="zone-diff-wrap">
                 <div className="zone-diff zone-diff-ist">{diff_local}</div>
                 <div className="zone-diff zone-diff-utc">{diff_utc}</div>

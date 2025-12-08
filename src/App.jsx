@@ -22,6 +22,7 @@ function App() {
   const [diff_local, setdiff_local] = useState({})
   const [showDiff, setshowDiff] = useState(true)
   const [sort, setsort] = useState(true) 
+  
 
   const props_object = {
     zone_name_mapping : zone_name_mapping,
@@ -36,16 +37,15 @@ function App() {
     setsort:setsort,
     region : region,
     setRegion : setRegion
+   
   }
 
   return (
     <>
       <Header preferredBase={preferredBase} setpreferredBase={setpreferredBase} showDiff={showDiff} setshowDiff={setshowDiff} />
-
-      <div className='card'>
-        <SelectRegion props_object={props_object} />        
-       
-      </div>
+      {/* <div className='card'> */}
+        <SelectRegion props_object={props_object} />
+      {/* </div> */}
       <LiveSection props_object={props_object} />
       <UserInputSection props_object={props_object}/>
 </>

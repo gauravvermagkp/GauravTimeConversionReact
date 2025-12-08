@@ -1,6 +1,3 @@
-.zone-row {
-    position: relative;
-}
 
 .zone-row {
     display: grid;
@@ -13,6 +10,7 @@
     border: 1px solid rgba(15, 23, 42, 0.03);
     box-shadow: 0 4px 12px rgba(2, 6, 23, 0.03);
     transition: box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+    position: relative;
 }
 
 .zone-row+.zone-row {
@@ -40,11 +38,6 @@
     justify-content: flex-end;
 }
 
-/* global toggle to hide all diffs */
-.diff-hidden .zone-diff-wrap {
-    display: none;
-}
-
 .zone-diff {
     font-size: 11px;
     font-weight: 600;
@@ -52,8 +45,6 @@
     margin-top: 4px;
     padding: 2px 8px;
     border-radius: 10px;
-    background: rgba(148, 163, 184, 0.18);
-    color: #334155;
 }
 
 .zone-diff-ist {
@@ -66,8 +57,7 @@
     color: #9a3412;
 }
 
-/* ======================================= */
-/* AM/PM tone styles - softer, no background, with icon via ::before */
+
 .time-am {
     color: #b45309;
 }
@@ -76,19 +66,7 @@
     color: #1d4ed8;
 }
 
-.zone-value.time-am::before,
-.est-box .big.time-am::before {
-    content: "☀️ ";
-    font-size: 14px;
-    vertical-align: middle;
-}
 
-.zone-value.time-pm::before,
-.est-box .big.time-pm::before {
-    content: "🌙 ";
-    font-size: 14px;
-    vertical-align: middle;
-}
 
 .zone-value.time-am {
     background: white;
@@ -108,9 +86,19 @@
     display: inline-block;
 }
 
+.zone-value.time-am::before{
+    content: "☀️ ";
+    font-size: 14px;
+    vertical-align: middle;
+}
+.zone-value.big.time-pm::before {
+    content: "🌙 ";
+    font-size: 14px;
+    vertical-align: middle;
+}
 
-/* ========================================= */
-/* Meeting planner / business hours shading – color the chips themselves */
+
+
 .business-core {
     background: linear-gradient(180deg, #ecfdf3, #dcfce7);
     border-color: rgba(22, 163, 74, 0.35);

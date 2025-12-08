@@ -49,7 +49,7 @@ export default function LiveSection({ props_object }) {
                 {!collapseLive ?
                     <div className="prominent">
                         <PrimaryEST converted_time={liveTimes['USA']} />
-                        <div className="others zone-table">
+                        <div className="others">
                             {Object.entries(zone_name_mapping).map(([country, tz_name]) => {
                                 if (Object.keys(zone_name_mapping_extras_original).includes(country)) return null
                                 let country_region = getRegionForCountry(country, region_mapping)

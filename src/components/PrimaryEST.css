@@ -1,0 +1,41 @@
+
+.est-box {
+    flex: 0 0 420px;
+    min-width: 260px;
+    background: linear-gradient(90deg, #fff2f2, #fff);
+    border: 1px solid rgba(239, 68, 68, 0.12);
+    padding: 18px 22px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(239, 68, 68, 0.06);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.est-box .label {
+    color: #b91c1c;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.est-box .big {
+    font-size: 28px;
+    font-weight: 900;
+    color: #7f1d1d;
+    margin-top: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.est-box .big.time-am::before {
+    content: "☀️ ";
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+
+.est-box .big.time-pm::before {
+    content: "🌙 ";
+    font-size: 14px;
+    vertical-align: middle;
+}
+
