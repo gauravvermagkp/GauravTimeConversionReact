@@ -1,13 +1,19 @@
 import { liveTime, sorting, timeDiffLabel, getRegionForCountry, zone_name_mapping_extras_original, region_mapping } from '../helper_functions.js';
 import { useState, useEffect } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 import PrimaryEST from './PrimaryEST.jsx'
 import ConvertedChips from './ConvertedChips.jsx';
+import {updateZoneMapping} from '../preferredBaseSlice';
 
 export default function LiveSection({ props_object }) {
-    const zone_name_mapping = props_object.zone_name_mapping
-    const sort = props_object.sort
-    const preferredBase = props_object.preferredBase
-    const setzone_name_mapping = props_object.setzone_name_mapping
+    const preferredBase = useSelector((state) => state.mypreferredBase.value);
+    const zone_name_mapping = useSelector((state) => state.mypreferredBase.zone_name_mapping);
+    const sort = useSelector((state) => state.mypreferredBase.sort);
+    const dispatch = useDispatch();
+
+
+
+    
     const setdiff_utc = props_object.setdiff_utc
     const setdiff_local = props_object.setdiff_local
     const showDiff = props_object.showDiff
@@ -23,11 +29,11 @@ export default function LiveSection({ props_object }) {
         const intervalId = setInterval(() => {
             setliveTimes(liveTime(zone_name_mapping));
         }, 1000);
-        setzone_name_mapping(Object.keys(sorting(liveTimes, sort))
+        dispatch(updateZoneMapping(Object.keys(sorting(liveTimes, sort))
             .reduce((acc, country) => {
                 acc[country] = zone_name_mapping[country];
                 return acc;
-            }, {}))
+            }, {})))
 
         const utc_diffs = {}
         const local_diffs = {}

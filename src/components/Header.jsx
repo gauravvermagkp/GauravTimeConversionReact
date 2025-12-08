@@ -1,8 +1,11 @@
 import './Header.css'
+import { useSelector,useDispatch } from 'react-redux';
+import { updatePrefferedBase } from  '../preferredBaseSlice';
 
-export default function Header({ preferredBase, setpreferredBase,showDiff, setshowDiff }) {
+export default function Header({showDiff, setshowDiff }) {
 
-
+const preferredBase = useSelector((state) => state.mypreferredBase.value);
+const dispatch = useDispatch();
   return (
     <>
       <div className="page-header">
@@ -14,7 +17,7 @@ export default function Header({ preferredBase, setpreferredBase,showDiff, setsh
           {["IST", "EST"].map((l) => (
             <label key={l} className="pref-option">
               <input type="radio" name="prefLocal" value={l} checked={l === preferredBase} 
-              onChange={(e) => setpreferredBase(e.target.value)} />{l}
+              onChange={(e) => dispatch(updatePrefferedBase(e.target.value))} />{l}
             </label>
           ))
           }
