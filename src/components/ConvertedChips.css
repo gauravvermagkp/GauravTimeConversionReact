@@ -30,18 +30,7 @@
 
 
 
-.zone-name {
-    font-weight: 800;
-    color: var(--text);
-    font-size: 15px;
-}
 
-.zone-value {
-    font-weight: 700;
-    color: #1e40af;
-    font-size: 15px;
-    text-align: right;
-}
 
 /* stack IST+UTC diffs neatly when both present */
 .zone-diff-wrap {
@@ -70,45 +59,17 @@
     color: #9a3412;
 }
 
-
-.time-am {
-    color: #b45309;
-}
-
-.time-pm {
-    color: #1d4ed8;
-}
-
-
-
-.zone-value.time-am {
-    background: white;
-    /* bright soft yellow */
-    color: orange;
-    padding: 4px 10px;
-    border-radius: 999px;
-    display: inline-block;
-}
-
-.zone-value.time-pm {
-    background: black;
-    /* bright soft blue */
-    color: burlywood;
-    padding: 4px 10px;
-    border-radius: 999px;
-    display: inline-block;
-}
-
 .zone-value.time-am::before {
     content: "☀️ ";
     font-size: 14px;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
-.zone-value.big.time-pm::before {
+.zone-value.time-pm::before {
     content: "🌙 ";
     font-size: 14px;
-    vertical-align: middle;
+    vertical-align: top;
+
 }
 
 
@@ -134,17 +95,65 @@
     opacity: 0.95;
 }
 
+.zone-name {
+    font-weight: 800;
+    color: var(--text);
+    font-size: 15px;
+}
+
+.zone-value {
+    font-weight: 700;
+    color: #1e40af;
+    font-size: 15px;
+    text-align: right;
+}
+
+.zone-value.time-am {
+    background: white;
+    color: orange;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.zone-value.time-pm {
+    background: black;
+    color: burlywood;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
 @media (max-width: 820px) {
     .zone-row {
         grid-template-columns: 1fr;
     }
+
     .zone-value {
         text-align: left;
-        margin-top: 8px;
         font-size: 15px;
     }
+
+    .zone-value.time-am {
+        background: none;
+        color: orange;
+        border-radius: 100px;
+        display: inline-block;
+        padding: 0px;
+        text-align: left;
+    }
+
+    .zone-value.time-pm {
+        background: none;
+        color: rgb(106, 3, 18);
+        border-radius: 999px;
+        display: inline-block;
+        padding: 0px;
+        text-align: left;
+    }
+
     .zone-diff-wrap {
-        justify-content: flex-start;
+        justify-content: flex-end;
     }
 
 }
