@@ -106,17 +106,35 @@ select {
 .collapse-btn:hover {
     border-color: var(--accent);
 }
-/* ============================================================ */
-.zone-row.apac{
-    border-left: 6px solid var(--syd-accent);
-}
 
-.zone-row.emea{
-    border-left: 6px solid var(--ber-accent);
-}
 
-.zone-row.clar{
-    border-left: 6px solid var(--est-accent);
+@media (max-width: 820px) {
+    body {
+        padding: 18px 12px;
+    }
+
+    .card {
+        padding: 16px;
+        margin-bottom: 18px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+     .prominent {
+        gap: 12px;
+        flex-direction: column;
+    }
+    
+    .prominent .others {
+        gap: 8px;
+    }
+
 }
 
 

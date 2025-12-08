@@ -39,3 +39,88 @@
     vertical-align: middle;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MOBILE / SMALL SCREENS */
+@media (max-width: 820px) {   
+   
+    .est-box {
+        flex: 0 0 auto;
+        width: 100%;
+        min-width: 0;
+        padding: 14px;
+    }
+
+    .est-box .big {
+        font-size: 20px;
+    }
+
+    .header-controls {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+   
+
+    /* make inputs and buttons easier to tap */
+    select,
+    .sort-btn,
+    input[type="datetime-local"] {
+        width: 100%;
+    }
+
+    .sort-btn {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+/* VERY SMALL (phone portrait) tweaks */
+@media (max-width: 420px) {
+
+    .collapse-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
+    }
+
+    .est-box .big {
+        font-size: 18px;
+    }
+
+    .zone-name {
+        font-size: 14px;
+    }
+
+    .zone-value {
+        font-size: 14px;
+    }
+
+    .sort-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .label {
+        font-size: 13px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+}
+
