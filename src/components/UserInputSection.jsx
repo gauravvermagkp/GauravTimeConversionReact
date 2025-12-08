@@ -4,14 +4,14 @@ import { useSelector,useDispatch } from 'react-redux';
 import PrimaryEST from './PrimaryEST.jsx'
 import ConvertedChips from './ConvertedChips.jsx';
 import './UserInputSection.css'
-import {updateZoneMapping} from '../preferredBaseSlice';
+import {updateZoneMapping} from '../mySlice.js';
 
 
 export default function UserInputSection({ props_object }) {
 
-    const zone_name_mapping = useSelector((state) => state.mypreferredBase.zone_name_mapping);
-    const preferredBase = useSelector((state) => state.mypreferredBase.value);
-    const sort = useSelector((state) => state.mypreferredBase.sort);  
+    const zone_name_mapping = useSelector((state) => state.timeConverterSlicerName.zone_name_mapping);
+    const preferredBase = useSelector((state) => state.timeConverterSlicerName.currentBase);
+    const sort = useSelector((state) => state.timeConverterSlicerName.sort);  
     const dispatch = useDispatch();
 
     

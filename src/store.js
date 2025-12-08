@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import counterReducer from './counterSlice';
-import mypreferredBaseReducer from './preferredBaseSlice';    
+import timeConverterSlicerNameReducer from './mySlice';    
 
 const store = configureStore({
   reducer: {
     // counter: counterReducer,
-    mypreferredBase : mypreferredBaseReducer   
+    timeConverterSlicerName : timeConverterSlicerNameReducer   
   }
 });
 

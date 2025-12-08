@@ -1,12 +1,12 @@
 import { region_mapping } from '../helper_functions.js';
 import BusinessHours from './BusinessHours.jsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateSort } from '../preferredBaseSlice';
+import { updateSort } from '../mySlice.js';
 import './SelectRegion.css';
 
 export default function SelectRegion({ props_object }) {
 
-    const sort = useSelector((state) => state.mypreferredBase.sort);
+    const sort = useSelector((state) => state.timeConverterSlicerName.sort);
     const dispatch = useDispatch();
 
     const region = props_object.region;

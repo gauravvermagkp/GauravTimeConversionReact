@@ -1,10 +1,10 @@
 import './Header.css'
 import { useSelector,useDispatch } from 'react-redux';
-import { updatePrefferedBase } from  '../preferredBaseSlice';
+import { updatePrefferedBase } from  '../mySlice';
 
 export default function Header({showDiff, setshowDiff }) {
 
-const preferredBase = useSelector((state) => state.mypreferredBase.value);
+const preferredBase = useSelector((state) => state.timeConverterSlicerName.currentBase);
 const dispatch = useDispatch();
   return (
     <>

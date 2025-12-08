@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import PrimaryEST from './PrimaryEST.jsx'
 import ConvertedChips from './ConvertedChips.jsx';
-import {updateZoneMapping} from '../preferredBaseSlice';
+import {updateZoneMapping} from '../mySlice.js';
 
 export default function LiveSection({ props_object }) {
-    const preferredBase = useSelector((state) => state.mypreferredBase.value);
-    const zone_name_mapping = useSelector((state) => state.mypreferredBase.zone_name_mapping);
-    const sort = useSelector((state) => state.mypreferredBase.sort);
+    const preferredBase = useSelector((state) => state.timeConverterSlicerName.currentBase);
+    const zone_name_mapping = useSelector((state) => state.timeConverterSlicerName.zone_name_mapping);
+    const sort = useSelector((state) => state.timeConverterSlicerName.sort);
     const dispatch = useDispatch();
 
 

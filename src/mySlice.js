@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {zone_name_mapping_initial} from './helper_functions.js'
 
-const preferredBaseSlice = createSlice({
-    name: 'mypreferredBase',
-    initialState: { value: "IST" , zone_name_mapping:zone_name_mapping_initial, sort: true},
+const mySlicer = createSlice({
+    name: 'timeConverterSlicerName',
+    initialState: { currentBase: "IST" , zone_name_mapping:zone_name_mapping_initial, sort: true},
     reducers: {
         updatePrefferedBase:(state, action) => { 
             state.value = action.payload;            
@@ -16,5 +16,5 @@ const preferredBaseSlice = createSlice({
         },
     }
 });
-export const { updatePrefferedBase,updateZoneMapping,updateSort } = preferredBaseSlice.actions;
-export default preferredBaseSlice.reducer;
+export const { updatePrefferedBase,updateZoneMapping,updateSort } = mySlicer.actions;
+export default mySlicer.reducer;
