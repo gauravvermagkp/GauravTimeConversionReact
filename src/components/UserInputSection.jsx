@@ -65,6 +65,7 @@ export default function UserInputSection({ props_object }) {
                 {!collapseConverted ? <>
                     <label className='cardlabel'>Choose Date & Time ({preferredBase}):</label>
                     <input id="userInput" type="datetime-local" value={inputDate} onChange={(e) => setinputDate(e.target.value)} />
+                    {console.log('Input Date in UserInputSection.jsx:', inputDate)}
 
                     <div className="prominent">
                         <PrimaryEST converted_time={convertedTimes['USA']} />

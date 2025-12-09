@@ -1,0 +1,54 @@
+.batch-row {
+  padding: 6px 10px;
+  background: #f5f7fa;
+  border: 1px solid #d9e2ec;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  width: fit-content;
+  margin-top: 4px;
+  font-weight: 540;
+  font-size: 12px;
+  display: flex;
+  white-space: nowrap; /* prevents breaking in middle of text */
+}
+
+/* Region color accents */
+.batch-apac { 
+  border-left: 6px solid var(--syd-accent); 
+}
+.batch-emea {
+  border-left: 6px solid var(--ber-accent); 
+}
+.batch-clar { 
+  border-left: 6px solid var(--est-accent); 
+}
+
+/* --------------------------------------------------
+   📱 Mobile responsiveness
+   Applies when screen width is 480px or smaller
+-------------------------------------------------- */
+@media (max-width: 480px) {
+  .batch-row {
+    padding: 4px 8px;        /* slightly smaller padding */
+    font-size: 14px;         /* reduce text size for mobile */
+    border-radius: 50px;     /* softer pill shape */
+    margin-top: 3px;
+    border-width: 1px;
+    font-style: oblique;
+  }
+
+  /* Make color stripes thinner on mobile */
+  .batch-apac,
+  .batch-emea,
+  .batch-clar {
+    border-left-width: 4px;
+  }
+}
+
+
+
+
+
+
+
+

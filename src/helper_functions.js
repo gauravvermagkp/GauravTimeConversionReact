@@ -194,3 +194,77 @@ export function classifyBusinessHours(time_str, timeZone) {
     if (h >= 9 && h < 18) return 'business-core';
     return 'business-extended';
 }
+
+// ==============================
+export const batchTimigs = {
+    'CLAR': ['02:30', '20:30',0],
+    'APAC': ['22:00', '04:00',1],
+    'EMEA': ['08:00', '14:00',0],
+
+};
+
+
+export function convertedTime2(timeStr, preferredBase) {
+
+    const today = new Date();
+    const [month, day, year] = [
+        today.getMonth(),
+        today.getDate(),
+        today.getFullYear()
+    ];
+
+    // 2. Combine date + time into one string
+    const start_time = `${year}-${month}-${day}T${timeStr[0]}`;
+    const end_time = `${year}-${month}-${day}T${timeStr[1]}`;
+
+    let utcMillis = ''
+    const opts = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true       
+    };
+    let parts = start_time.split('T');
+    if (parts.length !== 2) return null;
+    let [y, m, d] = parts[0].split('-').map(Number);
+    let [hh, mm] = parts[1].split(':').map(Number);
+    if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
+    let localUtcMillis = Date.UTC(y, m - 1, d, hh, mm, 0);
+    if (preferredBase === "IST") {
+        const istOffsetMs = 5.5 * 3600 * 1000; // IST = UTC+5:30
+        utcMillis = localUtcMillis - istOffsetMs;
+    }
+    else if (preferredBase === "EST") {
+        const estOffsetMs = 5 * 3600 * 1000; // EST = UTC-5:00 (approx, without DST)
+        utcMillis = localUtcMillis + estOffsetMs;
+
+    }
+    const start_time_converted = new Date(utcMillis).toLocaleString('en-GB', opts)
+
+    parts = end_time.split('T');
+    if (parts.length !== 2) return null;
+    [y, m, d] = parts[0].split('-').map(Number);
+    [hh, mm] = parts[1].split(':').map(Number);
+    if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
+    if(timeStr[2]===1){
+        d+=1;
+    }
+    localUtcMillis = Date.UTC(y, m - 1, d, hh, mm, 0);
+    if (preferredBase === "IST") {
+        const istOffsetMs = 5.5 * 3600 * 1000; // IST = UTC+5:30
+        utcMillis = localUtcMillis - istOffsetMs;
+    }
+    else if (preferredBase === "EST") {
+        const estOffsetMs = 5 * 3600 * 1000; // EST = UTC-5:00 (approx, without DST)
+        utcMillis = localUtcMillis + estOffsetMs;
+
+    }
+    const end_time_converted = new Date(utcMillis).toLocaleString('en-GB', opts) 
+    return [start_time_converted, end_time_converted]
+
+
+}
+// Input Date in UserInputSection.jsx: 2025-12-09T21:52

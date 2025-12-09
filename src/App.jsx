@@ -8,6 +8,7 @@ import SelectRegion from './components/SelectRegion'
 import { zone_name_mapping_initial } from './helper_functions.js'
 import LiveSection from './components/LiveSection.jsx'
 import UserInputSection from './components/UserInputSection.jsx'
+import BatchTimings from './components/BatchTimings.jsx'
 // import Counter from './Counter.jsx'
 
 function App() {
@@ -21,8 +22,6 @@ function App() {
 
 
   const props_object = {
-    // zone_name_mapping: zone_name_mapping,
-    // setzone_name_mapping: setzone_name_mapping,   
     diff_local: diff_local,
     setdiff_local: setdiff_local,
     diff_utc: diff_utc,
@@ -35,9 +34,9 @@ function App() {
 
   return (
     <>
-     {/* <Counter /> */}
-      <Header showDiff={showDiff} setshowDiff={setshowDiff} />
+      <Header showDiff={showDiff} setshowDiff={setshowDiff} />      
       <SelectRegion props_object={props_object} />
+      <BatchTimings region={region}/>
       <LiveSection props_object={props_object} />
       <UserInputSection props_object={props_object} />
 
