@@ -6,7 +6,7 @@ const mySlicer = createSlice({
     initialState: { currentBase: "IST" , zone_name_mapping:zone_name_mapping_initial, sort: true},
     reducers: {
         updatePrefferedBase:(state, action) => { 
-            state.value = action.payload;            
+            state.currentBase = action.payload;            
         },
         updateZoneMapping:(state, action) => {          
             state.zone_name_mapping = action.payload;            

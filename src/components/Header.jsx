@@ -6,6 +6,7 @@ export default function Header({showDiff, setshowDiff }) {
 
 const preferredBase = useSelector((state) => state.timeConverterSlicerName.currentBase);
 const dispatch = useDispatch();
+console.log('Preferred Base in Header.jsx:', preferredBase);
   return (
     <>
       <div className="page-header">
