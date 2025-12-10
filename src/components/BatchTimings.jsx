@@ -13,7 +13,7 @@ export default function BatchTimings({ region }) {
                     if (region == 'ALL' | batchname.toUpperCase().includes(region)) {
                         const newt = convertedTime2(start_end_time, preferredBase)
                         return <div className={`batch-row batch-${batchname.toLowerCase()}`}>
-                            <label>{`${batchname} : Start:${newt[0]},End:${newt[1]}`} </label>
+                            <label>{`${batchname} : ${newt[0]} -- ${newt[1]}`} </label>
                         </div>
                     }
 
