@@ -56,17 +56,23 @@
   display: block;
   margin: 10px auto;
 }
-
-/* hover */
-.btn-soft:hover {
-  background: #3d7ce0;
+#apacb1:hover,#apacb2:hover{
+  background: var(--syd-accent);
   box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
 }
 
-/* active press effect */
-.btn-soft:active {
-  transform: scale(0.96);
+#emeab1:hover,#emeab2:hover{
+  background: var(--ber-accent);
+  box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
 }
+
+
+#clarb1:hover,#clarb2:hover{
+  background: var(--est-accent);
+  box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
+}
+
+
 
 @media (max-width: 480px) {
   .btn-soft {
