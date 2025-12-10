@@ -233,7 +233,7 @@ export function convertedTime2(timeStr, preferredBase) {
     let [y, m, d] = parts[0].split('-').map(Number);
     let [hh, mm] = parts[1].split(':').map(Number);
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
-    let localUtcMillis = Date.UTC(y, m - 1, d, hh, mm, 0);
+    let localUtcMillis = Date.UTC(y, m, d, hh, mm, 0);
     if (preferredBase === "IST") {
         opts.timeZone = 'Asia/Kolkata'
     }
@@ -248,10 +248,10 @@ export function convertedTime2(timeStr, preferredBase) {
     [y, m, d] = parts[0].split('-').map(Number);
     [hh, mm] = parts[1].split(':').map(Number);
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
-    if(timeStr[2]===1){
-        d+=1;
-    }
-    localUtcMillis = Date.UTC(y, m - 1, d, hh, mm, 0);
+    // if(timeStr[2]===1){
+    //     d+=1;
+    // }
+    localUtcMillis = Date.UTC(y, m , d, hh, mm, 0);
     if (preferredBase === "IST") {
        opts.timeZone = 'Asia/Kolkata'
     }
