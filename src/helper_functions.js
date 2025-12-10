@@ -219,7 +219,6 @@ export function convertedTime2(timeStr, preferredBase) {
     const start_time = `${year}-${month}-${day}T${timeStr[0]}`;
     const end_time = `${year}-${month}-${day}T${timeStr[1]}`;
 
-    let utcMillis = ''
     const opts = {
         year: 'numeric',
         month: '2-digit',
@@ -242,7 +241,7 @@ export function convertedTime2(timeStr, preferredBase) {
          opts.timeZone = 'America/New_York'
 
     }
-    const start_time_converted = new Date(utcMillis).toLocaleString('en-GB', opts)
+    const start_time_converted = new Date(localUtcMillis).toLocaleString('en-GB', opts)
 
     parts = end_time.split('T');
     if (parts.length !== 2) return null;
@@ -260,7 +259,7 @@ export function convertedTime2(timeStr, preferredBase) {
        opts.timeZone = 'America/New_York'
 
     }
-    const end_time_converted = new Date(utcMillis).toLocaleString('en-GB', opts) 
+    const end_time_converted = new Date(localUtcMillis).toLocaleString('en-GB', opts) 
     return [start_time_converted, end_time_converted]
 
 
