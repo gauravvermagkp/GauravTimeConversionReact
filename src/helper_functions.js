@@ -236,12 +236,10 @@ export function convertedTime2(timeStr, preferredBase) {
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
     let localUtcMillis = Date.UTC(y, m - 1, d, hh, mm, 0);
     if (preferredBase === "IST") {
-        const istOffsetMs = 5.5 * 3600 * 1000; // IST = UTC+5:30
-        utcMillis = localUtcMillis - istOffsetMs;
+        opts.timeZone = 'Asia/Kolkata'
     }
     else if (preferredBase === "EST") {
-        const estOffsetMs = 5 * 3600 * 1000; // EST = UTC-5:00 (approx, without DST)
-        utcMillis = localUtcMillis + estOffsetMs;
+         opts.timeZone = 'America/New_York'
 
     }
     const start_time_converted = new Date(utcMillis).toLocaleString('en-GB', opts)
@@ -256,12 +254,10 @@ export function convertedTime2(timeStr, preferredBase) {
     }
     localUtcMillis = Date.UTC(y, m - 1, d, hh, mm, 0);
     if (preferredBase === "IST") {
-        const istOffsetMs = 5.5 * 3600 * 1000; // IST = UTC+5:30
-        utcMillis = localUtcMillis - istOffsetMs;
+       opts.timeZone = 'Asia/Kolkata'
     }
     else if (preferredBase === "EST") {
-        const estOffsetMs = 5 * 3600 * 1000; // EST = UTC-5:00 (approx, without DST)
-        utcMillis = localUtcMillis + estOffsetMs;
+       opts.timeZone = 'America/New_York'
 
     }
     const end_time_converted = new Date(utcMillis).toLocaleString('en-GB', opts) 
