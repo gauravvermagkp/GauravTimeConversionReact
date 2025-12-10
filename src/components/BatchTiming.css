@@ -30,7 +30,7 @@
 @media (max-width: 480px) {
   .batch-row {
     padding: 4px 8px;        /* slightly smaller padding */
-    font-size: 14px;         /* reduce text size for mobile */
+    font-size: 10px;         /* reduce text size for mobile */
     border-radius: 50px;     /* softer pill shape */
     margin-top: 3px;
     border-width: 1px;
