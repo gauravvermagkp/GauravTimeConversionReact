@@ -4,13 +4,15 @@ import { useSelector,useDispatch } from 'react-redux';
 import PrimaryEST from './PrimaryEST.jsx'
 import ConvertedChips from './ConvertedChips.jsx';
 import './UserInputSection.css'
-import {updateZoneMapping} from '../mySlice.js';
+import {updateZoneMapping, updateInputDate,updatecollapseConverted} from '../mySlice.js';
 
 
 export default function UserInputSection({ props_object }) {
 
     const zone_name_mapping = useSelector((state) => state.timeConverterSlicerName.zone_name_mapping);
     const preferredBase = useSelector((state) => state.timeConverterSlicerName.currentBase);
+    const inputDate = useSelector((state) => state.timeConverterSlicerName.inputDate);
+    const collapseConverted = useSelector((state) => state.timeConverterSlicerName.collapseConverted);
     const sort = useSelector((state) => state.timeConverterSlicerName.sort);  
     const dispatch = useDispatch();
 
@@ -24,9 +26,6 @@ export default function UserInputSection({ props_object }) {
 
 
     const [convertedTimes, setConvertedTimes] = useState({});
-    const [collapseConverted, setcollapseConverted] = useState(true)
-    const [inputDate, setinputDate] = useState("")
-
 
     useEffect(() => {
         const newConvertedTimes = {};
@@ -61,10 +60,10 @@ export default function UserInputSection({ props_object }) {
         <>
             <div className='card'>
                 <h3>User Input Converted</h3>
-                <button type="button" class="collapse-btn" onClick={() => setcollapseConverted(!collapseConverted)}>{collapseConverted ? '+' : '-'}</button>
+                <button type="button" class="collapse-btn" onClick={() => dispatch(updatecollapseConverted(!collapseConverted))}>{collapseConverted ? '+' : '-'}</button>
                 {!collapseConverted ? <>
                     <label className='cardlabel'>Choose Date & Time ({preferredBase}):</label>
-                    <input id="userInput" type="datetime-local" value={inputDate} onChange={(e) => setinputDate(e.target.value)} />
+                    <input id="userInput" type="datetime-local" value={inputDate} onChange={(e) => dispatch(updateInputDate(e.target.value))} />
                     {console.log('Input Date in UserInputSection.jsx:', inputDate)}
 
                     <div className="prominent">

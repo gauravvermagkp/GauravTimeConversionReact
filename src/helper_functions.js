@@ -83,10 +83,28 @@ export function liveTime(zone_name_mapping) {
     return newliveTimes
 }
 
+function convertToISO(input) {
+  // Example: "10/12/2025, 02:00:00 pm"
+  const [datePart, timePart] = input.split(", ");
+  const [day, month, year] = datePart.split("/").map(Number);
 
-export function convertedTime(inputDate, preferredBase, timeZone) {
+  let [time, ampm] = timePart.split(" ");
+  let [hour, minute, second] = time.split(":").map(Number);
 
-    if (inputDate) {
+  // Convert 12-hour → 24-hour
+  if (ampm.toLowerCase() === "pm" && hour !== 12) hour += 12;
+  if (ampm.toLowerCase() === "am" && hour === 12) hour = 0;
+
+  // Build ISO format (no seconds)
+  const iso = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+
+  return iso;
+}
+
+
+export function convertedTime(input, preferredBase, timeZone) {
+
+    if (input) {
         let utcMillis = ''
         const opts = {
             year: 'numeric',
@@ -98,9 +116,14 @@ export function convertedTime(inputDate, preferredBase, timeZone) {
             hour12: true,
             timeZone
         };
+        let inputDate = input;
+        if(input.includes(',')&&input.includes('/') ){
+            inputDate = convertToISO(input)
+        }       
         const parts = inputDate.split('T');
         if (parts.length !== 2) return null;
         const [y, m, d] = parts[0].split('-').map(Number);
+        
         const [hh, mm] = parts[1].split(':').map(Number);
         if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
         const localUtcMillis = Date.UTC(y, m - 1, d, hh, mm, 0);

@@ -1,5 +1,5 @@
 .batch-row {
-  padding: 6px 10px;
+  padding-left: 2px;
   background: #f5f7fa;
   border: 1px solid #d9e2ec;
   border-radius: 10px;
@@ -37,3 +37,49 @@
     border-left-width: 4px;   /* thinner stripe */
   }
 }
+
+
+/* ================================= */
+.btn-soft {
+
+  color: #0b0000;
+  border: none;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Inter", Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* box-shadow: 0 4px 12px rgba(79, 142, 247, 0.25); */
+  width: 100%;
+  max-width: 280px;
+  display: block;
+  margin: 10px auto;
+}
+
+/* hover */
+.btn-soft:hover {
+  background: #3d7ce0;
+  box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
+}
+
+/* active press effect */
+.btn-soft:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 480px) {
+  .btn-soft {
+    padding: 2px 2px;      /* slightly smaller padding */
+    font-size: 12px;         /* smaller text for portrait mode */
+    border-radius: 10px;     /* slightly smaller pill radius */
+    max-width: 40%;          /* fills more of the screen */
+    box-shadow: 0 3px 10px rgba(79, 142, 247, 0.22);
+  }
+
+  .btn-soft:active {
+    transform: scale(0.97);  /* gentler press effect for mobile */
+  }
+}
+
+
