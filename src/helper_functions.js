@@ -197,7 +197,7 @@ export function classifyBusinessHours(time_str, timeZone) {
 
 // ==============================
 export const batchTimigs = {
-    'CLAR': ['02:30', '20:30',0],
+    'CLAR': ['14:30', '20:30',0],
     'APAC': ['22:00', '04:00',1],
     'EMEA': ['08:00', '14:00',0],
 
