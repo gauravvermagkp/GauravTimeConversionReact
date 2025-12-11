@@ -53,6 +53,8 @@ export default function UserInputSection({ props_object }) {
             }, {});
         dispatch(updateZoneMapping(zone_name_mapping_sorted))
 
+        document.getElementById('others').scrollIntoView({behavior:"smooth"})
+
     }, [inputDate, preferredBase, sort]);
 
 
@@ -65,9 +67,9 @@ export default function UserInputSection({ props_object }) {
                     <label className='cardlabel'>Choose Date & Time ({preferredBase}):</label>
                     <input id="userInput" type="datetime-local" value={inputDate} onChange={(e) => dispatch(updateInputDate(e.target.value))} />                   
 
-                    <div className="prominent">
+                    <div className="prominent" >
                         <PrimaryEST converted_time={convertedTimes['USA']} />
-                        <div className="others">
+                        <div className="others" id="others">
                             {Object.entries(zone_name_mapping).map(([country, tz_name]) => {
                                 if (Object.keys(zone_name_mapping_extras_original).includes(country)) return null
                                 let country_region = getRegionForCountry(country, region_mapping)
@@ -83,11 +85,12 @@ export default function UserInputSection({ props_object }) {
                                 }
                             }
                             )}
+                            
                         </div>
                     </div>
-                </> : null}
+                </> :null}                 
             </div>
-            <div  id="convertedchips">hi</div>
+           
         </>
 
     )
