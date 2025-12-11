@@ -1,13 +1,14 @@
 import { batchTimigs, convertedTime2} from "../helper_functions"
 import './BatchTiming.css';
 import { useSelector, useDispatch } from 'react-redux';
-import {updateInputDate} from '../mySlice.js';
+import {updateInputDate,updatecollapseConverted} from '../mySlice.js';
 import { useState, useEffect } from "react";
 
 export default function BatchTimings({ region }) {
     const preferredBase = useSelector((state) => state.timeConverterSlicerName.currentBase);
     const dispatch = useDispatch();
     const [bid, setbid] = useState(null)
+    const [clickedclassName, setclickedclassName] = useState('');
  
     useEffect(() => {
        dispatch(updateInputDate(document.getElementById(bid)?document.getElementById(bid).value:''))
@@ -17,19 +18,27 @@ export default function BatchTimings({ region }) {
         <>
             {
                 Object.entries(batchTimigs).map(([batchname, start_end_time]) => {
-                    console.log('Region in BatchTimings.jsx:', region);
+
                     if (region == 'ALL' | batchname.toUpperCase().includes(region)) {
                         const newt = convertedTime2(start_end_time, preferredBase)                  
                         return <div className={`batch-row batch-${batchname.toLowerCase()}`}>
                             <label>{`${batchname} : `}</label>
-                            <button className="btn-soft" id={`${batchname.toLowerCase()}b1`} value={newt[0]} onClick={(e)=>{
-                                setbid(`${batchname}b1`)
+                            <button className={`btn-soft ${clickedclassName.includes(`${batchname.toLowerCase()}b1`)?`${clickedclassName}`:''}`}
+                            id={`${batchname.toLowerCase()}b1`} value={newt[0]} onClick={(e)=>{
+                                console.log('Button clicked:', e.target.id);
+                                setbid(`${batchname.toLowerCase()}b1`)                                             
+                                setclickedclassName(`${e.target.id}-clicked`)
                                 dispatch(updateInputDate(e.target.value))
+                                dispatch(updatecollapseConverted(false))
                                 }}>{newt[0]}</button>
                             <label> -- </label>                            
-                            <button className="btn-soft" id={`${batchname.toLowerCase()}b2`} value={newt[1]} onClick={(e)=>{
-                                setbid(`${batchname}b2`)
+                            <button className={`btn-soft ${clickedclassName.includes(`${batchname.toLowerCase()}b2`)?`${clickedclassName}`:''}`}
+                            id={`${batchname.toLowerCase()}b2`} value={newt[1]} onClick={(e)=>{
+                                console.log('Button clicked:', e.target.id);
+                                setbid(`${batchname.toLowerCase()}b2`)
+                                setclickedclassName(`${e.target.id}-clicked`)                               
                                 dispatch(updateInputDate(e.target.value))
+                                 dispatch(updatecollapseConverted(false))
                                 }}>{newt[1]}</button>
                         </div>
                     }

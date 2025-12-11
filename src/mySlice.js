@@ -16,10 +16,16 @@ const mySlicer = createSlice({
         },
         updateInputDate:(state, action) => {       
             state.inputDate = action.payload;
-            state.collapseConverted = false;            
+            // state.collapseConverted = false;            
         },
-         updatecollapseConverted:(state, action) => {       
-            state.collapseConverted = !state.collapseConverted                     
+         updatecollapseConverted:(state, action) => {
+            if(action.payload!==undefined){
+                state.collapseConverted = action.payload              
+            }  
+            else{
+                state.collapseConverted = !state.collapseConverted     
+            }     
+                            
         },
     }
 });

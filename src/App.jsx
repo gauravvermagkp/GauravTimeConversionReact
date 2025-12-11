@@ -5,11 +5,10 @@ import './App.css'
 import Header from './components/Header'
 
 import SelectRegion from './components/SelectRegion'
-import { zone_name_mapping_initial } from './helper_functions.js'
 import LiveSection from './components/LiveSection.jsx'
 import UserInputSection from './components/UserInputSection.jsx'
 import BatchTimings from './components/BatchTimings.jsx'
-// import Counter from './Counter.jsx'
+
 
 function App() {
 

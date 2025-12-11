@@ -71,6 +71,24 @@
   background: var(--est-accent);
   box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
 }
+/* ================================= */
+.apacb1-clicked,.apacb2-clicked{
+  background: var(--syd-accent);
+  box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
+}
+
+
+.emeab1-clicked,.emeab2-clicked{
+  background: var(--ber-accent);
+  box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
+}
+
+
+.clarb1-clicked,.clarb2-clicked{
+  background: var(--est-accent);
+  box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
+}
+
 
 
 
