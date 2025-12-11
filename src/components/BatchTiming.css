@@ -50,11 +50,10 @@
   font-family: "Inter", Arial, sans-serif;
   cursor: pointer;
   transition: all 0.2s ease;
-  /* box-shadow: 0 4px 12px rgba(79, 142, 247, 0.25); */
   width: 100%;
   max-width: 280px;
   display: block;
-  margin: 10px auto;
+  margin: 5px 0px 5px 0px;
 }
 #apacb1:hover,#apacb2:hover{
   background: var(--syd-accent);
@@ -88,6 +87,31 @@
   background: var(--est-accent);
   box-shadow: 0 5px 16px rgba(79, 142, 247, 0.35);
 }
+
+/* ================================================= */
+.apac-running{
+  animation: colorPulseApac 2s ease-in-out infinite;
+}
+.clar-running{
+  animation: colorPulseClar 2s ease-in-out infinite;
+}
+.emea-running{
+  animation: colorPulseEmea 2s ease-in-out infinite;
+}
+
+@keyframes colorPulseApac {
+  0%,100% { background: var(--syd-accent);}
+  10%     { background: var(--bg);}
+}
+@keyframes colorPulseClar {
+  0%,100% { background: var(--est-accent); }
+  50%     { background: var(--bg);  }
+}
+@keyframes colorPulseEmea {
+  0%,100% { background: var(--ber-accent); }
+  10%     { background: var(--bg); }
+}
+/* ================================================ */
 
 
 

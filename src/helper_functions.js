@@ -241,6 +241,7 @@ export function convertedTime2(timeStr, preferredBase) {
     // 2. Combine date + time into one string
     const start_time = `${year}-${month}-${day}T${timeStr[0]}`;
     const end_time = `${year}-${month}-${day}T${timeStr[1]}`;
+    
 
     const opts = {
         year: 'numeric',
@@ -249,8 +250,11 @@ export function convertedTime2(timeStr, preferredBase) {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: true       
+        hour12: true,
+        timeZone: 'UTC'       
     };
+   
+
     let parts = start_time.split('T');
     if (parts.length !== 2) return null;
     let [y, m, d] = parts[0].split('-').map(Number);
@@ -265,15 +269,14 @@ export function convertedTime2(timeStr, preferredBase) {
 
     }
     const start_time_converted = new Date(localUtcMillis).toLocaleString('en-GB', opts)
+    const current_time_converted = new Date().toLocaleString('en-GB', opts);
 
     parts = end_time.split('T');
     if (parts.length !== 2) return null;
     [y, m, d] = parts[0].split('-').map(Number);
     [hh, mm] = parts[1].split(':').map(Number);
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
-    // if(timeStr[2]===1){
-    //     d+=1;
-    // }
+   
     localUtcMillis = Date.UTC(y, m , d, hh, mm, 0);
     if (preferredBase === "IST") {
        opts.timeZone = 'Asia/Kolkata'
@@ -283,7 +286,11 @@ export function convertedTime2(timeStr, preferredBase) {
 
     }
     const end_time_converted = new Date(localUtcMillis).toLocaleString('en-GB', opts) 
-    return [start_time_converted, end_time_converted]
+    let is_running = false
+    if (current_time_converted>start_time_converted && current_time_converted<end_time_converted){
+        is_running = true
+    }
+    return [start_time_converted, end_time_converted,is_running]
 
 
 }
