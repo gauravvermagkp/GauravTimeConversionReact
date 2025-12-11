@@ -34,6 +34,7 @@ export default function BatchTimings({ region }) {
                                 setclickedclassName(`${e.target.id}-clicked`)
                                 dispatch(updateInputDate(e.target.value))
                                 dispatch(updatecollapseConverted(false))
+                                document.getElementById("convertedchips").scrollIntoView({ behavior: "smooth" });
                                 }}>{newt[0]}</button>
                             <label> -- </label>                            
                             <button className={`btn-soft ${clickedclassName.includes(`${batchname_lower}b2`)?clickedclassName:''}`}
@@ -42,6 +43,7 @@ export default function BatchTimings({ region }) {
                                 setclickedclassName(`${e.target.id}-clicked`)                               
                                 dispatch(updateInputDate(e.target.value))
                                  dispatch(updatecollapseConverted(false))
+                                 document.getElementById("convertedchips").scrollIntoView({ behavior: "smooth" });
                                 }}>{newt[1]}</button>
                         </div>
                     }
