@@ -221,9 +221,9 @@ export function classifyBusinessHours(time_str, timeZone) {
 // ==============================
 //UTC
 export const batchTimigs = {
-    'EMEA': ['03:00', '08:30',0],
-    'CLAR': ['09:00', '15:00',0],
-    'APAC': ['16:00', '22:00',1],
+    'EMEA': ['02:30', '08:30',0],
+    'CLAR': ['09:30', '15:20',0],
+    'APAC': ['16:45', '22:50',1],
    
 
 };
