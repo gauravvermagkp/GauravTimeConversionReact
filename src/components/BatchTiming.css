@@ -53,7 +53,7 @@
   width: 100%;
   max-width: 280px;
   display: block;
-  margin: 5px 0px 5px 0px;
+  margin: 5px 1px 5px 0px;
 }
 #apacb1:hover,#apacb2:hover{
   background: var(--syd-accent);
@@ -93,7 +93,7 @@
   animation: colorPulseApac 2s ease-in-out infinite;
 }
 .clar-running{
-  animation: colorPulseClar 2s ease-in-out infinite;
+  animation: colorPulseClar 3s ease-in-out infinite;
 }
 .emea-running{
   animation: colorPulseEmea 2s ease-in-out infinite;

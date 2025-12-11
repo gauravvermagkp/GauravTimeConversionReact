@@ -19,27 +19,25 @@ export default function BatchTimings({ region }) {
             {
                 Object.entries(batchTimigs).map(([batchname, start_end_time]) => {
 
-                    let batchname_lower= batchname.toLowerCase() 
-                    let clickedButton = clickedclassName.includes(`${batchname_lower}b2`)?clickedclassName:'' 
+                    let batchname_lower= batchname.toLowerCase()       
                        
                     if (region == 'ALL' | batchname.toUpperCase().includes(region)) {
                         const newt = convertedTime2(start_end_time, preferredBase)
-                        let is_running = newt[2]?`${batchname_lower}-running`:''                   
-                        return <div className={`batch-row batch-${batchname_lower}`}>
-                            <label>{`${batchname} : `}</label>
+                        let is_running = newt[2]?`${batchname_lower}-running`:''    
+                                       
+                        return <div className={`batch-row batch-${batchname_lower} ${is_running}`}>
+                            <label>{`${batchname} :`}</label>
                            
-                            <button className={`btn-soft ${clickedButton} ${is_running}`}
-                            id={`${batchname_lower}b1`} value={newt[0]} onClick={(e)=>{
-                                console.log('Button clicked:', e.target.id);
+                            <button className={`btn-soft ${clickedclassName.includes(`${batchname_lower}b1`)?clickedclassName:'' }`}
+                            id={`${batchname_lower}b1`} value={newt[0]} onClick={(e)=>{                               
                                 setbid(`${batchname_lower}b1`)                                             
                                 setclickedclassName(`${e.target.id}-clicked`)
                                 dispatch(updateInputDate(e.target.value))
                                 dispatch(updatecollapseConverted(false))
                                 }}>{newt[0]}</button>
                             <label> -- </label>                            
-                            <button className={`btn-soft ${clickedButton} ${is_running}`}
-                            id={`${batchname_lower}b2`} value={newt[1]} onClick={(e)=>{
-                                console.log('Button clicked:', e.target.id);
+                            <button className={`btn-soft ${clickedclassName.includes(`${batchname_lower}b2`)?clickedclassName:''}`}
+                            id={`${batchname_lower}b2`} value={newt[1]} onClick={(e)=>{                               
                                 setbid(`${batchname_lower}b2`)
                                 setclickedclassName(`${e.target.id}-clicked`)                               
                                 dispatch(updateInputDate(e.target.value))
