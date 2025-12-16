@@ -223,8 +223,7 @@ export function classifyBusinessHours(time_str, timeZone) {
 export const batchTimigs = {
     'EMEA': ['02:30', '08:30',0],
     'CLAR': ['09:30', '15:20',0],
-    'APAC': ['16:45', '22:50',1],
-   
+    'APAC': ['16:45', '22:50',1],  
 
 };
 
@@ -260,7 +259,7 @@ export function convertedTime2(timeStr, preferredBase) {
     let [y, m, d] = parts[0].split('-').map(Number);
     let [hh, mm] = parts[1].split(':').map(Number);
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
-    let localUtcMillis = Date.UTC(y, m, d, hh, mm, 0);
+    let localUtcMillis_start = Date.UTC(y, m, d, hh, mm, 0);
     if (preferredBase === "IST") {
         opts.timeZone = 'Asia/Kolkata'
     }
@@ -268,8 +267,8 @@ export function convertedTime2(timeStr, preferredBase) {
          opts.timeZone = 'America/New_York'
 
     }
-    const start_time_converted = new Date(localUtcMillis).toLocaleString('en-GB', opts)
-    const current_time_converted = new Date().toLocaleString('en-GB', opts);
+    const start_time_converted = new Date(localUtcMillis_start).toLocaleString('en-GB', opts)
+
 
     parts = end_time.split('T');
     if (parts.length !== 2) return null;
@@ -277,7 +276,7 @@ export function convertedTime2(timeStr, preferredBase) {
     [hh, mm] = parts[1].split(':').map(Number);
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
    
-    localUtcMillis = Date.UTC(y, m , d, hh, mm, 0);
+    let localUtcMillis_end = Date.UTC(y, m , d, hh, mm, 0);
     if (preferredBase === "IST") {
        opts.timeZone = 'Asia/Kolkata'
     }
@@ -285,9 +284,11 @@ export function convertedTime2(timeStr, preferredBase) {
        opts.timeZone = 'America/New_York'
 
     }
-    const end_time_converted = new Date(localUtcMillis).toLocaleString('en-GB', opts) 
+    const end_time_converted = new Date(localUtcMillis_end).toLocaleString('en-GB', opts) 
     let is_running = false
-    if (current_time_converted>start_time_converted && current_time_converted<end_time_converted){
+    const current_milliseconds = Date.now()
+    console.log(localUtcMillis_end, current_milliseconds, localUtcMillis_start)
+    if ((current_milliseconds<localUtcMillis_end)&& (current_milliseconds>localUtcMillis_start)){
         is_running = true
     }
     return [start_time_converted, end_time_converted,is_running]

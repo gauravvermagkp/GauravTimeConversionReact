@@ -54,6 +54,7 @@
   max-width: 280px;
   display: block;
   margin: 5px 1px 5px 0px;
+  padding: 0px 2px 0px 2px;
 }
 #apacb1:hover,#apacb2:hover{
   background: var(--syd-accent);
