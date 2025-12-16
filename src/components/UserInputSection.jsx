@@ -14,6 +14,7 @@ export default function UserInputSection({ props_object }) {
     const inputDate = useSelector((state) => state.timeConverterSlicerName.inputDate);
     const collapseConverted = useSelector((state) => state.timeConverterSlicerName.collapseConverted);
     const sort = useSelector((state) => state.timeConverterSlicerName.sort);  
+    const clickedRegion = useSelector((state) => state.timeConverterSlicerName.clickedRegion);
     const dispatch = useDispatch();
 
     
@@ -35,7 +36,6 @@ export default function UserInputSection({ props_object }) {
         if (!inputDate) {                    
             return
         };
-
         Object.entries(zone_name_mapping).forEach(([country, tz_name]) => {
             newConvertedTimes[country] = convertedTime(inputDate, preferredBase, tz_name);
             utc_diffs[country] = timeDiffLabel(tz_name, preferredBase)[0] || "--";
@@ -44,16 +44,14 @@ export default function UserInputSection({ props_object }) {
         setConvertedTimes(newConvertedTimes);
         setdiff_utc(utc_diffs);
         setdiff_local(local_diffs);
-
         newConvertedTimes_sorted = sorting(newConvertedTimes, sort)
         let zone_name_mapping_sorted = Object.keys(newConvertedTimes_sorted)
             .reduce((acc, country) => {
                 acc[country] = zone_name_mapping[country];
                 return acc;
             }, {});
-        dispatch(updateZoneMapping(zone_name_mapping_sorted))
-
-        document.getElementById('others').scrollIntoView({behavior:"smooth"})
+        dispatch(updateZoneMapping(zone_name_mapping_sorted))        
+        document.getElementById(`${clickedRegion}`)?document.getElementById(`${clickedRegion}`).scrollIntoView({behavior:"smooth"}):null
 
     }, [inputDate, preferredBase, sort]);
 
@@ -74,9 +72,9 @@ export default function UserInputSection({ props_object }) {
                                 if (Object.keys(zone_name_mapping_extras_original).includes(country)) return null
                                 let country_region = getRegionForCountry(country, region_mapping)
                                 if (region === "ALL") {
-                                    return <ConvertedChips key={country} country={country} tz_name={tz_name} converted_time={convertedTimes[country]}
+                                    return <div id={`${country_region.toLowerCase()}_chip`}><ConvertedChips key={country} country={country} tz_name={tz_name} converted_time={convertedTimes[country]}
                                         diff_local={diff_local[country]}
-                                        diff_utc={diff_utc[country]} showDiff={showDiff} country_region={country_region} />
+                                        diff_utc={diff_utc[country]} showDiff={showDiff} country_region={country_region} /></div>
                                 }
                                 else if (region_mapping[region].includes(country)) {
                                     return <ConvertedChips key={country} country={country} tz_name={tz_name} converted_time={convertedTimes[country]}

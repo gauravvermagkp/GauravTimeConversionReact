@@ -1,7 +1,7 @@
 import { batchTimigs, convertedTime2 } from "../helper_functions"
 import './BatchTiming.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateInputDate, updatecollapseConverted } from '../mySlice.js';
+import { updateInputDate, updatecollapseConverted,updateClickedRegion } from '../mySlice.js';
 import { useState, useEffect } from "react";
 
 export default function BatchTimings({ region }) {
@@ -30,9 +30,7 @@ export default function BatchTimings({ region }) {
             {
                 
                 Object.entries(batchTimigs).map(([batchname, start_end_time]) => {
-
                     let batchname_lower = batchname.toLowerCase()
-
                     if (region == 'ALL' | batchname.toUpperCase().includes(region)) {
                         const newt = convertedTime2(start_end_time, preferredBase)
                         let is_running = newt[2] ? `${batchname_lower}-running` : ''
@@ -45,8 +43,8 @@ export default function BatchTimings({ region }) {
                                     setbid(`${batchname_lower}b1`)
                                     setclickedclassName(`${e.target.id}-clicked`)
                                     dispatch(updateInputDate(e.target.value))
-                                    dispatch(updatecollapseConverted(false))
-                                    document.getElementById("convertedchips").scrollIntoView({ behavior: "smooth" });
+                                    dispatch(updatecollapseConverted(false)) 
+                                    dispatch(updateClickedRegion(`${batchname_lower}_chip`))                                  
                                 }}>{newt[0]}</button>
                             <label> -- </label>
                             <button className={`btn-soft ${clickedclassName.includes(`${batchname_lower}b2`) ? clickedclassName : ''}`}
@@ -55,7 +53,7 @@ export default function BatchTimings({ region }) {
                                     setclickedclassName(`${e.target.id}-clicked`)
                                     dispatch(updateInputDate(e.target.value))
                                     dispatch(updatecollapseConverted(false))
-                                    document.getElementById("convertedchips").scrollIntoView({ behavior: "smooth" });
+                                     dispatch(updateClickedRegion(`${batchname_lower}_chip`))                                 
                                 }}>{newt[1]}</button>
                         </div>
                     }

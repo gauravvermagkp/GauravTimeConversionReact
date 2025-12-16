@@ -3,7 +3,8 @@ import {zone_name_mapping_initial} from './helper_functions.js'
 
 const mySlicer = createSlice({
     name: 'timeConverterSlicerName',
-    initialState: { currentBase: "IST" , zone_name_mapping:zone_name_mapping_initial, sort: true, inputDate:undefined, collapseConverted:true},
+    initialState: { currentBase: "IST" , zone_name_mapping:zone_name_mapping_initial, sort: true, 
+        inputDate:undefined, collapseConverted:true, clickedRegion:undefined},
     reducers: {
         updatePrefferedBase:(state, action) => { 
             state.currentBase = action.payload;            
@@ -15,8 +16,7 @@ const mySlicer = createSlice({
             state.sort = !state.sort;            
         },
         updateInputDate:(state, action) => {       
-            state.inputDate = action.payload;
-            // state.collapseConverted = false;            
+            state.inputDate = action.payload;               
         },
          updatecollapseConverted:(state, action) => {
             if(action.payload!==undefined){
@@ -27,7 +27,11 @@ const mySlicer = createSlice({
             }     
                             
         },
+         updateClickedRegion:(state, action) => {       
+            state.clickedRegion = action.payload;
+                     
+        },
     }
 });
-export const { updatePrefferedBase,updateZoneMapping,updateSort,updateInputDate ,updatecollapseConverted} = mySlicer.actions;
+export const { updatePrefferedBase,updateZoneMapping,updateSort,updateInputDate ,updatecollapseConverted,updateClickedRegion} = mySlicer.actions;
 export default mySlicer.reducer;

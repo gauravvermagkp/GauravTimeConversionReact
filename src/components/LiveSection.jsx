@@ -29,11 +29,13 @@ export default function LiveSection({ props_object }) {
         const intervalId = setInterval(() => {
             setliveTimes(liveTime(zone_name_mapping));
         }, 1000);
-        dispatch(updateZoneMapping(Object.keys(sorting(liveTimes, sort))
+        const sorted_region_mapping = sorting(liveTimes, sort)
+        let zz= Object.keys(sorted_region_mapping)
             .reduce((acc, country) => {
                 acc[country] = zone_name_mapping[country];
                 return acc;
-            }, {})))
+            }, {})
+        dispatch(updateZoneMapping(zz))
 
         const utc_diffs = {}
         const local_diffs = {}

@@ -189,13 +189,29 @@ export function getRegionForCountry(country, mapping) {
     return "ALL";
 }
 
+function parseDateTime(str) {
+  // "16/12/2025, 07:38:13 pm"
+  const [datePart, timePart] = str.split(", ");
+  const [day, month, year] = datePart.split("/").map(Number);
+
+  let [time, ampm] = timePart.split(" ");
+  let [hour, minute, second] = time.split(":").map(Number);
+
+  // convert to 24-hour
+  if (ampm.toLowerCase() === "pm" && hour !== 12) hour += 12;
+  if (ampm.toLowerCase() === "am" && hour === 12) hour = 0;
+
+  return new Date(year, month - 1, day, hour, minute, second);
+}
+
 export function sorting(timeObj, sort) {
-    return Object.entries(timeObj)  //ASC
-        .sort((a, b) => sort ? new Date(a[1]) - new Date(b[1]) : new Date(b[1]) - new Date(a[1]))
+    const sorted = Object.entries(timeObj)  //ASC
+        .sort((a, b) => sort ? parseDateTime(a[1]) - parseDateTime(b[1]) : parseDateTime(b[1]) - parseDateTime(a[1]))
         .reduce((acc, [country, time]) => {
             acc[country] = time;
             return acc;
-        }, {});
+        }, {}); 
+    return sorted
 }
 
 
@@ -287,7 +303,6 @@ export function convertedTime2(timeStr, preferredBase) {
     const end_time_converted = new Date(localUtcMillis_end).toLocaleString('en-GB', opts) 
     let is_running = false
     const current_milliseconds = Date.now()
-    console.log(localUtcMillis_end, current_milliseconds, localUtcMillis_start)
     if ((current_milliseconds<localUtcMillis_end)&& (current_milliseconds>localUtcMillis_start)){
         is_running = true
     }
