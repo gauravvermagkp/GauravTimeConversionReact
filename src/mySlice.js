@@ -21,6 +21,7 @@ const mySlicer = createSlice({
         },
         updateSort: (state, action) => {
             state.sort = !state.sort;
+            state.clickedRegion = undefined;
         },
         updateInputDate: (state, action) => {
             state.inputDate = action.payload;
