@@ -15,6 +15,7 @@ const mySlicer = createSlice({
     reducers: {
         updatePrefferedBase: (state, action) => {
             state.currentBase = action.payload;
+            state.clickedRegion = undefined;
         },
         updateZoneMapping: (state, action) => {
             state.zone_name_mapping = action.payload;
