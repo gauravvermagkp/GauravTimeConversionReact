@@ -4,7 +4,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import PrimaryEST from './PrimaryEST.jsx'
 import ConvertedChips from './ConvertedChips.jsx';
 import './UserInputSection.css'
-import {updateZoneMapping, updateInputDate,updatecollapseConverted} from '../mySlice.js';
+import {updateZoneMapping, updateInputDate, updatecollapseConverted, updateClickedRegion, updateClickedclassName} from '../mySlice.js';
 
 
 export default function UserInputSection({ props_object }) {
@@ -51,8 +51,7 @@ export default function UserInputSection({ props_object }) {
                 return acc;
             }, {});
         dispatch(updateZoneMapping(zone_name_mapping_sorted))        
-        document.getElementById(`${clickedRegion}`)?document.getElementById(`${clickedRegion}`).scrollIntoView({behavior:"smooth"}):null
-
+        document.getElementById(`${clickedRegion}`)?document.getElementById(`${clickedRegion}`).scrollIntoView({behavior:"smooth"}):null       
     }, [inputDate, preferredBase, sort]);
 
 
@@ -63,7 +62,10 @@ export default function UserInputSection({ props_object }) {
                 <button type="button" class="collapse-btn" onClick={() => dispatch(updatecollapseConverted(!collapseConverted))}>{collapseConverted ? '+' : '-'}</button>
                 {!collapseConverted ? <>
                     <label className='cardlabel'>Choose Date & Time ({preferredBase}):</label>
-                    <input id="userInput" type="datetime-local" value={inputDate} onChange={(e) => dispatch(updateInputDate(e.target.value))} />                   
+                    <input id="userInput" type="datetime-local" value={inputDate} onChange={(e) => {
+                        dispatch(updateInputDate(e.target.value))
+                        dispatch(updateClickedclassName(''))
+                    }} />                   
 
                     <div className="prominent" >
                         <PrimaryEST converted_time={convertedTimes['USA']} />
@@ -77,9 +79,9 @@ export default function UserInputSection({ props_object }) {
                                         diff_utc={diff_utc[country]} showDiff={showDiff} country_region={country_region} /></div>
                                 }
                                 else if (region_mapping[region].includes(country)) {
-                                    return <ConvertedChips key={country} country={country} tz_name={tz_name} converted_time={convertedTimes[country]}
+                                    return <div id={`${country_region.toLowerCase()}_chip`}><ConvertedChips key={country} country={country} tz_name={tz_name} converted_time={convertedTimes[country]}
                                         diff_local={diff_local[country]}
-                                        diff_utc={diff_utc[country]} showDiff={showDiff} country_region={country_region} />
+                                        diff_utc={diff_utc[country]} showDiff={showDiff} country_region={country_region} /></div>
                                 }
                             }
                             )}
