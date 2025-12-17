@@ -66,6 +66,7 @@ export default function UserInputSection({ props_object }) {
                     <input id="userInput" type="datetime-local" value={inputDate} onChange={(e) => {
                         dispatch(updateInputDate(e.target.value));
                         dispatch(updateClickedRegion(''));
+            dispatch(updateClickedclassName(''));
                     }} />                   
 
                     <div className="prominent" >
