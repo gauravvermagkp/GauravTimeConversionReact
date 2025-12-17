@@ -60,13 +60,12 @@ export default function UserInputSection({ props_object }) {
             <div className='card'>
                 <h3>User Input Converted</h3>
                 <button type="button" class="collapse-btn" onClick={() => {
-            dispatch(updatecollapseConverted(!collapseConverted))}>{collapseConverted ? '+' : '-'
-                }}</button>
+            dispatch(updatecollapseConverted(!collapseConverted))}>{collapseConverted ? '+' : '-'}}</button>
                 {!collapseConverted ? <>
                     <label className='cardlabel'>Choose Date & Time ({preferredBase}):</label>
                     <input id="userInput" type="datetime-local" value={inputDate} onChange={(e) => {
-                        dispatch(updateInputDate(e.target.value))
-                        dispatch(updateClickedRegion(''))
+                        dispatch(updateInputDate(e.target.value));
+                        dispatch(updateClickedRegion(''));
                     }} />                   
 
                     <div className="prominent" >
