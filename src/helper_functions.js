@@ -276,6 +276,9 @@ export function convertedTime2(timeStr, preferredBase) {
     let [hh, mm] = parts[1].split(':').map(Number);
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
     let localUtcMillis_start = Date.UTC(y, m, d, hh, mm, 0);
+    if(timeStr[2]===1){
+         let localUtcMillis_start = Date.UTC(y, m, d-1, hh, mm, 0);
+    }
     if (preferredBase === "IST") {
         opts.timeZone = 'Asia/Kolkata'
     }
