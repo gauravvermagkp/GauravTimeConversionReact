@@ -237,9 +237,9 @@ export function classifyBusinessHours(time_str, timeZone) {
 // ==============================
 //UTC
 export const batchTimigs = {
-    'EMEA': ['02:30', '08:30',0],
-    'CLAR': ['09:30', '15:20',0],
-    'APAC': ['16:45', '22:50',1],  
+    'APAC': ['16:45', '22:50','apac'],  
+    'EMEA': ['02:30', '08:30','emea'],
+    'CLAR': ['09:30', '15:20','clar'],
 
 };
 
@@ -252,11 +252,13 @@ export function convertedTime2(timeStr, preferredBase) {
         today.getDate(),
         today.getFullYear()
     ];
+    const clar_end_time = `${year}-${month}-${day}T15:20`
+    const current_milliseconds = Date.now()
+    
 
     // 2. Combine date + time into one string
     const start_time = `${year}-${month}-${day}T${timeStr[0]}`;
-    const end_time = `${year}-${month}-${day}T${timeStr[1]}`;
-    
+    const end_time = `${year}-${month}-${day}T${timeStr[1]}`;    
 
     const opts = {
         year: 'numeric',
@@ -268,27 +270,35 @@ export function convertedTime2(timeStr, preferredBase) {
         hour12: true,
         timeZone: 'UTC'       
     };
-   
 
-    let parts = start_time.split('T');
+    let parts = clar_end_time.split('T');
     if (parts.length !== 2) return null;
     let [y, m, d] = parts[0].split('-').map(Number);
     let [hh, mm] = parts[1].split(':').map(Number);
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
+    let localUtcMillis_clar_end = Date.UTC(y, m, d, hh, mm, 0);
+
+   
+
+    parts = start_time.split('T');
+    if (parts.length !== 2) return null;
+    [y, m, d] = parts[0].split('-').map(Number);
+    [hh, mm] = parts[1].split(':').map(Number);
+    if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
     let localUtcMillis_start = Date.UTC(y, m, d, hh, mm, 0);
-    if(timeStr[2]===1){
+    if(current_milliseconds>localUtcMillis_clar_end){
+        if(timeStr[2]==='apac'){
+            localUtcMillis_start = Date.UTC(y, m, d, hh, mm, 0);
+        }
+        else{
+            localUtcMillis_start = Date.UTC(y, m, d+1, hh, mm, 0);
+        }
+    }
+    else if(timeStr[2]==='apac'){
          localUtcMillis_start = Date.UTC(y, m, d-1, hh, mm, 0);
     }
-    if (preferredBase === "IST") {
-        opts.timeZone = 'Asia/Kolkata'
-    }
-    else if (preferredBase === "EST") {
-         opts.timeZone = 'America/New_York'
 
-    }
-    const start_time_converted = new Date(localUtcMillis_start).toLocaleString('en-GB', opts)
-
-
+  
     parts = end_time.split('T');
     if (parts.length !== 2) return null;
     [y, m, d] = parts[0].split('-').map(Number);
@@ -296,7 +306,15 @@ export function convertedTime2(timeStr, preferredBase) {
     if ([y, m, d, hh, mm].some(v => Number.isNaN(v))) return null;
    
     let localUtcMillis_end = Date.UTC(y, m , d, hh, mm, 0);
-     if(timeStr[2]===1){
+    if(current_milliseconds>localUtcMillis_clar_end){
+         if(timeStr[2]==='apac'){
+            localUtcMillis_end = Date.UTC(y, m, d, hh, mm, 0);
+        }
+        else{
+            localUtcMillis_end = Date.UTC(y, m, d+1, hh, mm, 0);
+        }        
+    }
+    else if(timeStr[2]==='apac'){
          localUtcMillis_end = Date.UTC(y, m, d-1, hh, mm, 0);
     }
     if (preferredBase === "IST") {
@@ -306,9 +324,11 @@ export function convertedTime2(timeStr, preferredBase) {
        opts.timeZone = 'America/New_York'
 
     }
+
+    const start_time_converted = new Date(localUtcMillis_start).toLocaleString('en-GB', opts)
     const end_time_converted = new Date(localUtcMillis_end).toLocaleString('en-GB', opts) 
     let is_running = false
-    const current_milliseconds = Date.now()
+    
     if ((current_milliseconds<localUtcMillis_end)&& (current_milliseconds>localUtcMillis_start)){
         is_running = true
     }
