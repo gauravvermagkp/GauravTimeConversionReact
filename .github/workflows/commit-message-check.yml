@@ -24,7 +24,7 @@ jobs:
               echo "   $msg"
               echo "Required pattern: NGSEINT- followed by at least 4 digits"
               echo "Examples:"
-              echo "  NGSEINT-1234: feature adition"
+              echo "NGSEINT-1234: feature adition"
               exit 1
             fi
           done
