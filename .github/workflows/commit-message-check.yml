@@ -1,0 +1,30 @@
+name: Commit Message Pattern Check
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  check-commit-messages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit messages
+        run: |
+          pattern="NGSEINT-[0-9]{4,}"
+
+          commits=$(git log --pretty=format:%s ${{ github.event.before }}..${{ github.sha }})
+
+          echo "$commits" | while read msg; do
+            if ! echo "$msg" | grep -Eq "$pattern"; then
+              echo "❌ Invalid commit message:"
+              echo "   $msg"
+              echo "Required pattern: NGSEINT- followed by at least 4 digits"
+              exit 1
+            fi
+          done
+
+          echo "✅ All commit messages are valid"
